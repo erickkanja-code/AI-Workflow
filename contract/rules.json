@@ -1,0 +1,9 @@
+[
+  {"id": "R1", "text": "When there is no pending pickup and no called suit, the card played must match either the suit or the rank of the top card. Aces are the exception (see R2)."},
+  {"id": "R2", "text": "Aces are wild. An Ace can be played on any card, including another Ace or an Ace with a called suit, except when there is a pending pickup from 2s (see R4). The player calls a suit, which becomes the active suit."},
+  {"id": "R3", "text": "When a suit has been called with an Ace, the next card must be of the called suit. The printed suit of the Ace does not count. Aces may still be played (see R2)."},
+  {"id": "R4", "text": "When 2s have been played and there is a pending pickup, the only card that can be played is a 2, of any suit. It stacks, adding 2 to the pickup for the next player. Any other card, including an Ace, is not allowed, and the player must pick up the pending total."},
+  {"id": "R5", "text": "Power cards are 2s, 8s, Jacks and Aces. 8s skip and Jacks reverse. A player may not play a power card as their final card. That play is not allowed, and the player draws instead."},
+  {"id": "R6", "text": "A player must say \"last card\" as they play the card that leaves them with exactly one card. If they don't, they automatically pick up 2 cards immediately, and the card they played still counts. There is no penalty for saying \"last card\" when it isn't true."},
+  {"id": "R7", "text": "An illegal play is taken back with no extra penalty (allowed: false, penalty: 0), and the last-card penalty does not apply to it. The penalty counts only extra cards, which means only the 2 cards from R6. Any pending pickup from 2s is tracked separately in pending_draw and is never added to the penalty."}
+]

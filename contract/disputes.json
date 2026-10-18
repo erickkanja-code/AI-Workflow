@@ -1,0 +1,101 @@
+[
+  {"id": "D1", "question": "Can I play a card that matches the top card's rank but not its suit?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["7C", "3D", "KS"]},
+   "action": {"play": "7C", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R1", "penalty": 0}},
+
+  {"id": "D2", "question": "Can I play a card that matches neither the suit nor the rank of the top card?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["9C", "3D", "KS"]},
+   "action": {"play": "9C", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R1", "penalty": 0}},
+
+  {"id": "D3", "question": "Can I play a 2 as a normal card when no pickup is pending, if it matches the suit?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["2H", "5D", "KS"]},
+   "action": {"play": "2H", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R1", "penalty": 0}},
+
+  {"id": "D4", "question": "Can I play an Ace on a card of a different suit and rank?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["AS", "4D", "KC"]},
+   "action": {"play": "AS", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R2", "penalty": 0}},
+
+  {"id": "D5", "question": "Can I play an Ace on another Ace after a suit has been called?",
+   "state": {"top_card": "AS", "active_suit": "H", "pending_draw": 0, "hand": ["AD", "4C", "KC"]},
+   "action": {"play": "AD", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R2", "penalty": 0}},
+
+  {"id": "D6", "question": "After an Ace of spades with hearts called, can I play a spade to match the Ace's printed suit?",
+   "state": {"top_card": "AS", "active_suit": "H", "pending_draw": 0, "hand": ["7S", "4D", "KC"]},
+   "action": {"play": "7S", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R3", "penalty": 0}},
+
+  {"id": "D7", "question": "After an Ace with hearts called, can I play a heart?",
+   "state": {"top_card": "AS", "active_suit": "H", "pending_draw": 0, "hand": ["7H", "4D", "KC"]},
+   "action": {"play": "7H", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R3", "penalty": 0}},
+
+  {"id": "D8", "question": "After an Ace with clubs called, can I play a 2 of hearts, given that 2s can be any suit when stacking?",
+   "state": {"top_card": "AS", "active_suit": "C", "pending_draw": 0, "hand": ["2H", "5D", "9S"]},
+   "action": {"play": "2H", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R3", "penalty": 0}},
+
+  {"id": "D9", "question": "Can I stack a 2 of a different suit on a 2 to pass the pickup on?",
+   "state": {"top_card": "2H", "active_suit": null, "pending_draw": 2, "hand": ["2C", "5D", "9S"]},
+   "action": {"play": "2C", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R4", "penalty": 0}},
+
+  {"id": "D10", "question": "Can I play an Ace to get out of a pending pickup, since Aces go on anything?",
+   "state": {"top_card": "2H", "active_suit": null, "pending_draw": 2, "hand": ["AS", "5D", "9S"]},
+   "action": {"play": "AS", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R4", "penalty": 0}},
+
+  {"id": "D11", "question": "During a pending pickup of 4, can I play a matching-suit non-2? If it's rejected, do I get the last-card penalty for not saying it?",
+   "state": {"top_card": "2H", "active_suit": null, "pending_draw": 4, "hand": ["7H", "5D"]},
+   "action": {"play": "7H", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R4", "penalty": 0}},
+
+  {"id": "D12", "question": "Can I finish the game by playing an 8 as my final card?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["8H"]},
+   "action": {"play": "8H", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R5", "penalty": 0}},
+
+  {"id": "D13", "question": "Can I finish the game by playing an Ace as my final card, since Aces are wild?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["AC"]},
+   "action": {"play": "AC", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R5", "penalty": 0}},
+
+  {"id": "D14", "question": "Can I stack my final card, a 2, on a pending pickup to win?",
+   "state": {"top_card": "2H", "active_suit": null, "pending_draw": 2, "hand": ["2C"]},
+   "action": {"play": "2C", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R5", "penalty": 0}},
+
+  {"id": "D15", "question": "Can I finish the game on a normal matching card?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["9H"]},
+   "action": {"play": "9H", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R5", "penalty": 0}},
+
+  {"id": "D16", "question": "If I play down to one card without saying \"last card\", does the card still count, and what's the penalty?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["7C", "KD"]},
+   "action": {"play": "7C", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R6", "penalty": 2}},
+
+  {"id": "D17", "question": "If I say \"last card\" as I play down to one card, is there any penalty?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["7C", "KD"]},
+   "action": {"play": "7C", "said_last_card": true},
+   "expected": {"allowed": true, "rule": "R6", "penalty": 0}},
+
+  {"id": "D18", "question": "Is there a penalty for saying \"last card\" when I'll still have three cards left?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["7C", "KD", "3S", "9S"]},
+   "action": {"play": "7C", "said_last_card": true},
+   "expected": {"allowed": true, "rule": "R6", "penalty": 0}},
+
+  {"id": "D19", "question": "If I stack a 2 that leaves me with one card and forget to say \"last card\", do I get the penalty, and is the pending pickup added to it?",
+   "state": {"top_card": "2H", "active_suit": null, "pending_draw": 2, "hand": ["2C", "5D"]},
+   "action": {"play": "2C", "said_last_card": false},
+   "expected": {"allowed": true, "rule": "R6", "penalty": 2}},
+
+  {"id": "D20", "question": "If my illegal play would have left me with one card and I didn't say \"last card\", is there any penalty?",
+   "state": {"top_card": "7H", "active_suit": null, "pending_draw": 0, "hand": ["9C", "4D"]},
+   "action": {"play": "9C", "said_last_card": false},
+   "expected": {"allowed": false, "rule": "R7", "penalty": 0}}
+]
